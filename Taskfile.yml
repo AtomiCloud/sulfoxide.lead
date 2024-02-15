@@ -1,0 +1,50 @@
+version: "3"
+
+env:
+  RELEASE_NAME: sulfoxide-krypton
+
+includes:
+  util: tasks/Taskfile.util.yaml
+  entei:onyx:
+    taskfile: tasks/Taskfile.cluster.yaml
+    vars:
+      LANDSCAPE: entei
+      CLUSTER: onyx
+
+tasks:
+  # Utility
+  start:cluster:
+    desc: Starts the playground cluster to test helm charts
+    cmds:
+      - ./scripts/local/create-k3d-cluster.sh
+
+  stop:cluster:
+    desc: Destroys the playground cluster to test helm charts
+    cmds:
+      - ./scripts/local/delete-k3d-cluster.sh
+
+  # Helm Operations
+  update:
+    desc: Update Helm dependencies
+    dir: chart
+    cmds:
+      - helm dependency update
+
+  latest:
+    desc: Get the latest version of Cert Manager
+    cmds:
+      - task: util:latest
+        vars:
+          REPO_NAME: aws-ebs-csi-driver
+          REPO_URL: https://kubernetes-sigs.github.io/aws-ebs-csi-driver
+          CHART_NAME: aws-ebs-csi-driver
+      - task: util:latest
+        vars:
+          REPO_NAME: aws-efs-csi-driver
+          REPO_URL: https://kubernetes-sigs.github.io/aws-efs-csi-driver
+          CHART_NAME: aws-efs-csi-driver
+      - task: util:latest
+        vars:
+          REPO_NAME: eks
+          REPO_URL: https://aws.github.io/eks-charts
+          CHART_NAME: aws-load-balancer-controller

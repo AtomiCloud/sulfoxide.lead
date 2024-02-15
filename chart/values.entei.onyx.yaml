@@ -1,0 +1,74 @@
+serviceTree:
+  landscape: &landscape entei
+  cluster: &cluster onyx
+
+tags: &tags
+  atomi.cloud/landscape: *landscape
+  atomi.cloud/cluster: *cluster
+
+clusterName: &clusterName entei-onyx
+
+role: &role "arn:aws:iam::767398020544:role/entei-onyx-irsa-2024021506251630470000001f"
+
+
+aws-ebs-csi-driver:
+  enabled: true
+  customLabels:
+    <<: *tags
+  storageClasses:
+    - name: ebs
+      annotations:
+        storageclass.kubernetes.io/is-default-class: true
+      labels:
+        <<: *tags
+        tr8.io/layer: "1"
+
+      volumeBindingMode: WaitForFirstConsumer
+      reclaimPolicy: Retain
+
+      parameters: {}
+  controller:
+    replicaCount: 2
+    podLabels:
+      <<: *tags
+    podAnnotations:
+      <<: *tags
+    serviceAccount:
+      annotations:
+        eks.amazonaws.com/role-arn: *role
+    extraVolumeTags:
+      <<: *tags
+
+aws-efs-csi-driver:
+  enabled: false
+  storageClasses:
+    - name: efs
+      labels:
+        <<: *tags
+        tr8.io/layer: "1"
+      volumeBindingMode: WaitForFirstConsumer
+      reclaimPolicy: Retain
+      parameters:
+
+  replicaCount: 2
+  controller:
+    serviceAccount:
+      annotations:
+        eks.amazonaws.com/role-arn: *role
+    create: true
+    podAnnotations:
+      <<: *tags
+
+aws-load-balancer-controller:
+  enabled: true
+  clusterName: *clusterName
+  replicaCount: 2
+  serviceAccount:
+    annotations:
+      eks.amazonaws.com/role-arn: *role
+  additionalLabels:
+    <<: *tags
+  podLabels:
+    <<: *tags
+  podAnnotations:
+    <<: *tags

@@ -1,0 +1,120 @@
+# -- AtomiCloud Service Tree. See [ServiceTree](https://atomicloud.larksuite.com/wiki/OkfJwTXGFiMJkrk6W3RuwRrZs64?theme=DARK&contentTheme=DARK#MHw5d76uDo2tBLx86cduFQMRsBb)
+serviceTree:
+  platform: &platform sulfoxide
+  service: &service lead
+  layer: &layer "1"
+
+# -- Kubernetes labels and annotations, following Service Tree
+tags: &tags
+  atomi.cloud/platform: *platform
+  atomi.cloud/service: *service
+  atomi.cloud/layer: *layer
+
+# -- Cluster name for the EKS cluster
+clusterName: &clusterName name
+
+# -- Role ARN for IRSA for service account
+role: &role "role"
+
+# -- Module labels and annotations, following Service Tree for each EKS plugin
+modules:
+  ebs: &ebs ebs-controller
+  efs: &efs efs-controller
+  elb: &elb elb-controller
+
+
+
+# -- AWS EBS CSI Driver configuration. See [AWS EBS CSI Driver Helm Chart](https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/docs/install.md)
+aws-ebs-csi-driver:
+  customLabels:
+    <<: *tags
+    atomi.cloud/module: *ebs
+  storageClasses: []
+  controller:
+    topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: "topology.kubernetes.io/zone"
+        whenUnsatisfiable: ScheduleAnyway
+        labelSelector:
+        matchLabels:
+            <<: *tags
+    replicaCount: 2
+    podLabels:
+      <<: *tags
+      atomi.cloud/module: *ebs
+    podAnnotations:
+      <<: *tags
+      atomi.cloud/module: *ebs
+    loggingFormat: json
+    serviceAccount:
+      create: true
+      name: *ebs
+      annotations:
+        eks.amazonaws.com/role-arn: *role
+    extraVolumeTags:
+      <<: *tags
+      atomi.cloud/module: *ebs
+    resources:
+      requests:
+        cpu: 128m
+        memory: 256Mi
+      limits:
+        cpu: 250m
+        memory: 512Mi
+
+# -- AWS EFS CSI Driver configuration. See [AWS EFS CSI Driver Helm Chart](https://github.com/kubernetes-sigs/aws-efs-csi-driver/tree/master)
+aws-efs-csi-driver:
+  storageClasses: []
+  replicaCount: 2
+  controller:
+    resources:
+      requests:
+        cpu: 128m
+        memory: 256Mi
+      limits:
+        cpu: 250m
+        memory: 512Mi
+    serviceAccount:
+      create: true
+      name: *efs
+      annotations:
+        eks.amazonaws.com/role-arn: *role
+    create: true
+    podAnnotations:
+      <<: *tags
+      atomi.cloud/module: *efs
+
+# -- AWS LoadBalancer Controller configuration. See [AWS LoadBalancer Controller Helm Chart](https://github.com/aws/eks-charts/tree/master/stable/aws-load-balancer-controller)
+aws-load-balancer-controller:
+  clusterName: *clusterName
+  serviceMonitor:
+    enabled: true
+  replicaCount: 2
+  resources:
+    requests:
+      cpu: 62.5m
+      memory: 128Mi
+    limits:
+      cpu: 250m
+      memory: 512Mi
+  topologySpreadConstraints:
+    - maxSkew: 1
+      topologyKey: "topology.kubernetes.io/zone"
+      whenUnsatisfiable: ScheduleAnyway
+      labelSelector:
+        matchLabels:
+          <<: *tags
+  serviceAccount:
+    create: true
+    name: *elb
+    annotations:
+      eks.amazonaws.com/role-arn: *role
+  additionalLabels:
+    <<: *tags
+    atomi.cloud/module: *elb
+  podLabels:
+    <<: *tags
+    atomi.cloud/module: *elb
+  podAnnotations:
+    <<: *tags
+    atomi.cloud/module: *elb

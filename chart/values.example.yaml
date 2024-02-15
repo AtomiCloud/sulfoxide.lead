@@ -1,0 +1,54 @@
+serviceTree:
+  landscape: &landscape entei
+  cluster: &cluster opal
+
+tags: &tags
+  atomi.cloud/landscape: *landscape
+  atomi.cloud/cluster: *cluster
+
+clusterName: &clusterName name
+
+role: &role "role"
+
+
+aws-ebs-csi-driver:
+  customLabels:
+    <<: *tags
+  storageClasses: []
+  controller:
+    replicaCount: 2
+    podLabels:
+      <<: *tags
+    podAnnotations:
+      <<: *tags
+    serviceAccount:
+      create: true
+      annotations:
+        eks.amazonaws.com/role-arn: *role
+    extraVolumeTags:
+      <<: *tags
+
+aws-efs-csi-driver:
+  storageClasses: []
+  replicaCount: 2
+  controller:
+    serviceAccount:
+      create: true
+      annotations:
+        eks.amazonaws.com/role-arn: *role
+    create: true
+    podAnnotations:
+      <<: *tags
+
+aws-load-balancer-controller:
+  clusterName: *clusterName
+  serviceAccount:
+    create: true
+    annotations:
+      eks.amazonaws.com/role-arn: *role
+  additionalLabels:
+    <<: *tags
+  podLabels:
+    <<: *tags
+  podAnnotations:
+    <<: *tags

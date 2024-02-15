@@ -1,0 +1,21 @@
+apiVersion: v2
+name: sulfoxide-lead
+description: Helm chart to deploy EKS Bootstrap components includingg CSI (EBS and EFS) and LoadBalancer drivers
+type: application
+version: 1.0.0
+appVersion: "0.1.0"
+dependencies:
+  - name: aws-ebs-csi-driver
+    repository: https://kubernetes-sigs.github.io/aws-ebs-csi-driver
+    version: 2.27.0
+    condition: aws-ebs-csi-driver.enabled
+  - name: aws-efs-csi-driver
+    repository: https://kubernetes-sigs.github.io/aws-efs-csi-driver
+    version: 2.5.5
+    condition: aws-efs-csi-driver.enabled
+  - name: aws-load-balancer-controller
+    repository: https://aws.github.io/eks-charts
+    version: 1.7.1
+    condition: aws-load-balancer-controller.enabled
+
+
