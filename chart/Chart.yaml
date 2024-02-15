@@ -17,5 +17,3 @@ dependencies:
     repository: https://aws.github.io/eks-charts
     version: 1.7.1
     condition: aws-load-balancer-controller.enabled
-
-
