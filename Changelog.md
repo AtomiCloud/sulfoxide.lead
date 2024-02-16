@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/AtomiCloud/sulfoxide.lead/compare/v1.0.0...v1.0.1) (2024-02-16)
+
+
+### 🐛 Bug Fixes
+
+* quote true for annotation to become string ([b8baa89](https://github.com/AtomiCloud/sulfoxide.lead/commit/b8baa89207b486ade89ae73ff2d23e3584e3cef3))
+
 ## 1.0.0 (2024-02-15)
 
 
