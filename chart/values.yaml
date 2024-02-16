@@ -36,8 +36,8 @@ aws-ebs-csi-driver:
         topologyKey: "topology.kubernetes.io/zone"
         whenUnsatisfiable: ScheduleAnyway
         labelSelector:
-        matchLabels:
-            <<: *tags
+          matchLabels:
+              <<: *tags
     replicaCount: 2
     podLabels:
       <<: *tags
