@@ -18,7 +18,7 @@ aws-ebs-csi-driver:
   storageClasses:
     - name: ebs
       annotations:
-        storageclass.kubernetes.io/is-default-class: true
+        storageclass.kubernetes.io/is-default-class: "true"
       labels:
         <<: *tags
         tr8.io/layer: "1"
