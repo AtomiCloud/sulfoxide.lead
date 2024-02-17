@@ -2,7 +2,7 @@ apiVersion: v2
 name: sulfoxide-lead
 description: Helm chart to deploy EKS Bootstrap components includingg CSI (EBS and EFS) and LoadBalancer drivers
 type: application
-version: 1.0.3
+version: 1.1.0
 appVersion: "0.1.0"
 dependencies:
   - name: aws-ebs-csi-driver

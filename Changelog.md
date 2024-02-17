@@ -1,3 +1,10 @@
+## [1.1.0](https://github.com/AtomiCloud/sulfoxide.lead/compare/v1.0.3...v1.1.0) (2024-02-17)
+
+
+### 🚀 New Features
+
+* deploy zone-spreader ([21e4a7e](https://github.com/AtomiCloud/sulfoxide.lead/commit/21e4a7e452a65c002f6ad6525cb4bf3f3bb2f2cc))
+
 ## [1.0.3](https://github.com/AtomiCloud/sulfoxide.lead/compare/v1.0.2...v1.0.3) (2024-02-17)
 
 
