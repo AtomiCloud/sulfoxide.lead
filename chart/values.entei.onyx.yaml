@@ -16,17 +16,17 @@ aws-ebs-csi-driver:
   customLabels:
     <<: *tags
   storageClasses:
-    - name: ebs
+    - name: ebs-gp3
       annotations:
         storageclass.kubernetes.io/is-default-class: "true"
       labels:
         <<: *tags
         tr8.io/layer: "1"
-
       volumeBindingMode: WaitForFirstConsumer
       reclaimPolicy: Retain
-
-      parameters: {}
+      parameters:
+        type: gp3
+        encrypted: true
   controller:
     replicaCount: 2
     podLabels:
@@ -48,7 +48,7 @@ aws-efs-csi-driver:
         tr8.io/layer: "1"
       volumeBindingMode: WaitForFirstConsumer
       reclaimPolicy: Retain
-      parameters:
+      parameters: {}
 
   replicaCount: 2
   controller:
