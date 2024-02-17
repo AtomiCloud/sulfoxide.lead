@@ -118,3 +118,44 @@ aws-load-balancer-controller:
   podAnnotations:
     <<: *tags
     atomi.cloud/module: *elb
+
+
+
+
+zoneSpread:
+  config:
+
+    image: "public.ecr.aws/eks-distro/kubernetes/pause:3.7"
+
+    # -- PodSecurityContext for zone-spread pod
+    podSecurityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      fsGroup: 1000
+      runAsNonRoot: true
+
+    # -- SecurityContext for zone-spread pod
+    securityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      runAsNonRoot: true
+      runAsUser: 1000
+      runAsGroup: 1000
+      capabilities:
+        drop:
+          - ALL
+
+    # -- Resources for zone-spread pod
+    resources:
+      requests:
+        cpu: "0"
+        memory: "0"
+      limits:
+        cpu: 125m
+        memory: 128Mi
+  # -- topology zones to deploy zone-spread pod to force node provisioning across zones
+  zones:
+    zone1:
+      zone: ap-southeast-1a
+      enabled: false
+      replicas: 1
