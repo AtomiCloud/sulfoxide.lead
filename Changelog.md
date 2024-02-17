@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/AtomiCloud/sulfoxide.lead/compare/v1.0.2...v1.0.3) (2024-02-17)
+
+
+### 🐛 Bug Fixes
+
+* encrypted should be quoted ([f0011bd](https://github.com/AtomiCloud/sulfoxide.lead/commit/f0011bda97c8400420948b2e31942d56222fc672))
+
 ## [1.0.2](https://github.com/AtomiCloud/sulfoxide.lead/compare/v1.0.1...v1.0.2) (2024-02-16)
 
 
