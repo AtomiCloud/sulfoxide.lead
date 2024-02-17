@@ -26,7 +26,7 @@ aws-ebs-csi-driver:
       reclaimPolicy: Retain
       parameters:
         type: gp3
-        encrypted: true
+        encrypted: "true"
   controller:
     replicaCount: 2
     podLabels:
