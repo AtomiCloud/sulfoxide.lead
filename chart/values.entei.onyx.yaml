@@ -1,26 +1,21 @@
 serviceTree:
   landscape: &landscape entei
   cluster: &cluster onyx
-
 tags: &tags
   atomi.cloud/landscape: *landscape
   atomi.cloud/cluster: *cluster
-
 clusterName: &clusterName entei-onyx
-
 role: &role "arn:aws:iam::767398020544:role/entei-onyx-irsa-2024022106221275480000001b"
-
-
 aws-ebs-csi-driver:
   enabled: true
   customLabels:
-    <<: *tags
+    !!merge <<: *tags
   storageClasses:
     - name: ebs-gp3
       annotations:
         storageclass.kubernetes.io/is-default-class: "true"
       labels:
-        <<: *tags
+        !!merge <<: *tags
         tr8.io/layer: "1"
       volumeBindingMode: WaitForFirstConsumer
       reclaimPolicy: Retain
@@ -30,26 +25,24 @@ aws-ebs-csi-driver:
   controller:
     replicaCount: 2
     podLabels:
-      <<: *tags
+      !!merge <<: *tags
     podAnnotations:
-      <<: *tags
+      !!merge <<: *tags
     serviceAccount:
       annotations:
         eks.amazonaws.com/role-arn: *role
     extraVolumeTags:
-      <<: *tags
-
+      !!merge <<: *tags
 aws-efs-csi-driver:
   enabled: false
   storageClasses:
     - name: efs
       labels:
-        <<: *tags
+        !!merge <<: *tags
         tr8.io/layer: "1"
       volumeBindingMode: WaitForFirstConsumer
       reclaimPolicy: Retain
       parameters: {}
-
   replicaCount: 2
   controller:
     serviceAccount:
@@ -57,8 +50,7 @@ aws-efs-csi-driver:
         eks.amazonaws.com/role-arn: *role
     create: true
     podAnnotations:
-      <<: *tags
-
+      !!merge <<: *tags
 aws-load-balancer-controller:
   enabled: true
   clusterName: *clusterName
@@ -67,12 +59,11 @@ aws-load-balancer-controller:
     annotations:
       eks.amazonaws.com/role-arn: *role
   additionalLabels:
-    <<: *tags
+    !!merge <<: *tags
   podLabels:
-    <<: *tags
+    !!merge <<: *tags
   podAnnotations:
-    <<: *tags
-
+    !!merge <<: *tags
 zoneSpread:
   zones:
     zone1:
