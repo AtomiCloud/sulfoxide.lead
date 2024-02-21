@@ -8,7 +8,7 @@ tags: &tags
 
 clusterName: &clusterName entei-onyx
 
-role: &role "arn:aws:iam::767398020544:role/entei-onyx-irsa-2024022008540122740000001a"
+role: &role "arn:aws:iam::767398020544:role/entei-onyx-irsa-2024022106221275480000001b"
 
 
 aws-ebs-csi-driver:
