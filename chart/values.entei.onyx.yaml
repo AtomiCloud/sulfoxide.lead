@@ -5,7 +5,7 @@ tags: &tags
   atomi.cloud/landscape: *landscape
   atomi.cloud/cluster: *cluster
 clusterName: &clusterName entei-onyx
-role: &role "arn:aws:iam::767398020544:role/entei-onyx-irsa-2024022106221275480000001b"
+role: &role "arn:aws:iam::767398020544:role/entei-onyx-irsa-2024022112461446710000001a"
 aws-ebs-csi-driver:
   enabled: true
   customLabels:
