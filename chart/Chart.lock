@@ -1,12 +1,12 @@
 dependencies:
 - name: aws-ebs-csi-driver
   repository: https://kubernetes-sigs.github.io/aws-ebs-csi-driver
-  version: 2.27.0
+  version: 2.33.0
 - name: aws-efs-csi-driver
   repository: https://kubernetes-sigs.github.io/aws-efs-csi-driver
-  version: 2.5.5
+  version: 3.0.8
 - name: aws-load-balancer-controller
   repository: https://aws.github.io/eks-charts
-  version: 1.7.1
-digest: sha256:d570d434004ba9f774b6b657bbccf548e1148582a7135377d1400ddf40beb409
-generated: "2024-02-17T17:04:56.971697+08:00"
+  version: 1.8.2
+digest: sha256:2d2dabbe934e42517796a7076e78bcf01ebd3040de135c8ede5a7c8ad9c61353
+generated: "2024-08-11T11:48:13.95673+08:00"
