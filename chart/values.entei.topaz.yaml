@@ -5,7 +5,7 @@ tags: &tags
   atomi.cloud/landscape: *landscape
   atomi.cloud/cluster: *cluster
 clusterName: &clusterName entei-topaz
-role: &role "arn:aws:iam::008971647716:role/entei-topaz-irsa"
+role: &role "arn:aws:iam::982534394842:role/entei-topaz-irsa"
 aws-ebs-csi-driver:
   enabled: true
   customLabels:
