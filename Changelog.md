@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/AtomiCloud/sulfoxide.lead/compare/v1.2.0...v1.2.1) (2024-08-16)
+
+
+### 🐛 Bug Fixes
+
+* upgrade to topaz ([39e5369](https://github.com/AtomiCloud/sulfoxide.lead/commit/39e5369f936eb88d46968af702d17ac36cad0377))
+
 ## [1.2.0](https://github.com/AtomiCloud/sulfoxide.lead/compare/v1.1.0...v1.2.0) (2024-08-11)
 
 
