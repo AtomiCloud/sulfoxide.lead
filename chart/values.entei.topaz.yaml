@@ -6,6 +6,7 @@ tags: &tags
   atomi.cloud/cluster: *cluster
 clusterName: &clusterName entei-topaz
 role: &role "arn:aws:iam::445567088997:role/entei-topaz-irsa"
+vpcId: &vpcId vpc-0d3e19e7b22442a8b
 aws-ebs-csi-driver:
   enabled: true
   customLabels:
@@ -52,6 +53,7 @@ aws-efs-csi-driver:
     podAnnotations:
       !!merge <<: *tags
 aws-load-balancer-controller:
+  vpcId: *vpcId
   enabled: true
   clusterName: *clusterName
   replicaCount: 2

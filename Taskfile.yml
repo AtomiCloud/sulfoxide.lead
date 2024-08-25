@@ -1,15 +1,20 @@
-version: "3"
+version: '3'
 
 env:
   RELEASE_NAME: sulfoxide-krypton
 
 includes:
   util: tasks/Taskfile.util.yaml
-  entei:onyx:
+  entei:topaz:
     taskfile: tasks/Taskfile.cluster.yaml
     vars:
       LANDSCAPE: entei
-      CLUSTER: onyx
+      CLUSTER: topaz
+  entei:amber:
+    taskfile: tasks/Taskfile.cluster.yaml
+    vars:
+      LANDSCAPE: entei
+      CLUSTER: amber
 
 tasks:
   # Utility
