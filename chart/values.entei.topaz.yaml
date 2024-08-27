@@ -6,7 +6,7 @@ tags: &tags
   atomi.cloud/cluster: *cluster
 clusterName: &clusterName entei-topaz
 role: &role "arn:aws:iam::445567088997:role/entei-topaz-irsa"
-vpcId: &vpcId vpc-0d3e19e7b22442a8b
+vpcId: &vpcId vpc-0a1d126c9a9139abc
 aws-ebs-csi-driver:
   enabled: true
   customLabels:
