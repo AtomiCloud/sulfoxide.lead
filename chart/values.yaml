@@ -56,8 +56,8 @@ aws-ebs-csi-driver:
       atomi.cloud/module: *ebs
     resources:
       requests:
-        cpu: 128m
-        memory: 256Mi
+        cpu: 5m
+        memory: 5Mi
       limits:
         cpu: 250m
         memory: 512Mi
@@ -69,8 +69,8 @@ aws-efs-csi-driver:
   controller:
     resources:
       requests:
-        cpu: 128m
-        memory: 256Mi
+        cpu: 5m
+        memory: 5Mi
       limits:
         cpu: 250m
         memory: 512Mi
@@ -93,8 +93,8 @@ aws-load-balancer-controller:
   replicaCount: 2
   resources:
     requests:
-      cpu: 62.5m
-      memory: 128Mi
+      cpu: 5m
+      memory: 5Mi
     limits:
       cpu: 250m
       memory: 512Mi
