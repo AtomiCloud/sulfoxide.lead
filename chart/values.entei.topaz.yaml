@@ -68,14 +68,14 @@ aws-load-balancer-controller:
     !!merge <<: *tags
 zoneSpread:
   zones:
-    zone1:
-      zone: ap-southeast-1a
-      enabled: true
-      replicas: 1
-    zone2:
-      zone: ap-southeast-1b
-      enabled: true
-      replicas: 1
+#    zone1:
+#      zone: ap-southeast-1a
+#      enabled: true
+#      replicas: 1
+#    zone2:
+#      zone: ap-southeast-1b
+#      enabled: true
+#      replicas: 1
     zone3:
       zone: ap-southeast-1c
       enabled: true
