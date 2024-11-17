@@ -6,7 +6,7 @@ tags: &tags
   atomi.cloud/cluster: *cluster
 clusterName: &clusterName entei-topaz
 role: &role "arn:aws:iam::058264095736:role/entei-topaz-irsa"
-vpcId: &vpcId vpc-0e8f1acbe08e5e743
+vpcId: &vpcId vpc-0a4ed3a6f9986e88f
 aws-ebs-csi-driver:
   enabled: true
   customLabels:
@@ -68,14 +68,14 @@ aws-load-balancer-controller:
     !!merge <<: *tags
 zoneSpread:
   zones:
-#    zone1:
-#      zone: ap-southeast-1a
-#      enabled: true
-#      replicas: 1
-#    zone2:
-#      zone: ap-southeast-1b
-#      enabled: true
-#      replicas: 1
+    #    zone1:
+    #      zone: ap-southeast-1a
+    #      enabled: true
+    #      replicas: 1
+    #    zone2:
+    #      zone: ap-southeast-1b
+    #      enabled: true
+    #      replicas: 1
     zone3:
       zone: ap-southeast-1c
       enabled: true
